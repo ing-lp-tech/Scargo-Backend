@@ -61,6 +61,10 @@ app.post("/auth/verify", authMiddleware, (req, res) => {
   res.status(200).json({ status: 200, message: "Valid token" });
 });
 
+app.get("/", (req, res) => {
+  res.send("Text connected");
+});
+
 app.listen(PORT, () => {
   console.log(
     "El servidor se esta escuhando en http://localhost:" + PORT + "/"
