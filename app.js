@@ -19,7 +19,13 @@ const secretKey = process.env.SECRET_KEY_JWT;
 
 app.use("/api/products/", productRouter);
 
-const users = [];
+/* const users = []; */
+const users = [
+  { username: "luis", password: "luis" },
+  { username: "usuario1", password: "contrasena1" },
+  { username: "usuario2", password: "contrasena2" },
+  { username: "usuario3", password: "contrasena3" },
+];
 
 app.post("/register", (req, res) => {
   console.log(req.body);
