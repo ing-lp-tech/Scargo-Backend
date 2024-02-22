@@ -10,18 +10,20 @@
     `
 }
  */
-const productCreatedTemplate = (email, username, product) => {
+const mailMessageTemplate = (nombre, correo, mensaje) => {
+  console.log("nombre, correo, mensaje:", nombre, correo, mensaje);
   return {
     from: process.env.GMAIL_USER,
     to: process.env
       .GMAIL_USER /* Deberia ir email pero como estamos probando me lo envio a mi mismo */,
-    subject: "Has creado un producto " + username,
+    subject: "Has creado un mail " + nombre,
     html: `
-        <h1 style='background-color: blue; color: white;'>Felicitaciones</h1>
-        <p>El producto ${product.nombre} se creo satifactoriamente</p>
-        <a href='#'>Ve el detalle de tu producto</a>
+        
+        <p>El producto ${mensaje}</p>
+        
         `,
   };
 };
+mailMessageTemplate();
 
-module.exports = { productCreatedTemplate };
+module.exports = { mailMessageTemplate };

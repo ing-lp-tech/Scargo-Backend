@@ -6,6 +6,9 @@ const cors = require("cors");
 dotenv.config(); //Habilita las viariables de entorno
 
 const productRouter = require("./router/productRouter");
+
+const contactRouter = require("./router/contactRouter");
+
 const authMiddleware = require("./middlewares/authMiddleware");
 
 const app = express();
@@ -19,7 +22,14 @@ const secretKey = process.env.SECRET_KEY_JWT;
 
 app.use("/api/products/", productRouter);
 
-const users = [];
+app.use("/api/contact/", contactRouter);
+
+/* const users = [];*/
+const users = [
+  { username: "sole", password: "sole" },
+  { username: "luis", password: "luis" },
+  { username: "rosa", password: "rosa" },
+];
 
 app.post("/register", (req, res) => {
   console.log(req.body);
@@ -37,7 +47,7 @@ app.post("/register", (req, res) => {
     .json({ message: "User was created successfully!", status: 201 });
 });
 
-app.post("/login", (req, res) => {
+/* app.post("/login", (req, res) => {
   const { username, password } = req.body;
   const user = users.find(
     (user) => user.username == username && user.password == password
@@ -49,6 +59,23 @@ app.post("/login", (req, res) => {
   }
   const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
   res.status(200).json({ accessToken: token, status: 200 });
+}); */
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  const user = users.find(
+    (user) => user.username == username && user.password == password
+  );
+  if (!user) {
+    return res
+      .status(401)
+      .json({ message: "Invalid credentials", status: 401 });
+  }
+  const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
+  res
+    .status(200)
+    .json({ message: "Login successfully!", accessToken: token, status: 200 });
 });
 
 app.post("/auth/verify", authMiddleware, (req, res) => {
