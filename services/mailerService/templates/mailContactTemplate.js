@@ -11,7 +11,6 @@
 }
  */
 const mailMessageTemplate = (nombre, correo, mensaje) => {
-  console.log("nombre, correo, mensaje:", nombre, correo, mensaje);
   return {
     from: process.env.GMAIL_USER,
     to: process.env
@@ -24,6 +23,6 @@ const mailMessageTemplate = (nombre, correo, mensaje) => {
         `,
   };
 };
-mailMessageTemplate();
+/* mailMessageTemplate(); */
 
 module.exports = { mailMessageTemplate };

@@ -16,12 +16,28 @@ const createMail = async ({ nombre, correo, mensaje }) => {
         }
       }
     );
-    return result;
+    return true;
   } catch (error) {
-    console.error("error");
+    console.error("error enviando el mail");
     return false;
   }
 };
+/* 
+mailerService.transport.sendMail(
+  productCreatedTemplate("", "admin", {
+    nombre,
+    precio,
+    stock,
+    descripcion,
+  }),
+  (error) => {
+    if (error) {
+      console.error("no se pudo enviar el mail");
+    } else {
+      console.log("Se envio el mail correctamente");
+    }
+  }
+); */
 
 /* getAllProducts(2) */
 
