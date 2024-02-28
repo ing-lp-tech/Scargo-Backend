@@ -1,4 +1,7 @@
-const { createMail } = require("../services/mailContactService/serviceMail");
+const {
+  createMail,
+  ReceiveMail,
+} = require("../services/mailContactService/serviceMail");
 
 const postMailController = async (req, res) => {
   const { nombre, correo, mensaje } = req.body;
@@ -7,6 +10,8 @@ const postMailController = async (req, res) => {
     return res.status(404).json({ message: "Bad request" });
   }
   const mail = await createMail({ nombre, correo, mensaje });
+
+  const mailReceive = await ReceiveMail({ nombre, correo, mensaje });
 
   console.log("mail:", mail);
 

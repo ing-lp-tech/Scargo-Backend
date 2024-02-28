@@ -10,16 +10,18 @@
     `
 }
  */
-const mailMessageTemplate = (nombre, correo, mensaje) => {
+const mailReceiveTemplate = (nombre, correo, mensaje) => {
   return {
     from: process.env.GMAIL_USER,
-    to: correo /* Deberia ir email pero como estamos probando me lo envio a mi mismo */,
-    subject: "Se ha recibido su mje sr/a:" + nombre,
+    to: process.env
+      .GMAIL_USER /* Deberia ir email pero como estamos probando me lo envio a mi mismo */,
+    subject: "Se ha recibido un del mail:" + correo,
     html: `
-    <p> Nos comunicaremos a la brevedad</p>
-        `,
+    <p> Mje recidvido de: ${nombre}</p>
+      <p> El mensaje recibido fue: ${mensaje}</p>
+          `,
   };
 };
 /* mailMessageTemplate(); */
 
-module.exports = { mailMessageTemplate };
+module.exports = { mailReceiveTemplate };

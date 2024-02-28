@@ -3,6 +3,9 @@ const mailerService = require("../mailerService/mailerService");
 const {
   mailMessageTemplate,
 } = require("../mailerService/templates/mailContactTemplate");
+const {
+  mailReceiveTemplate,
+} = require("../mailerService/templates/mailReceiveTemplate");
 
 const createMail = async ({ nombre, correo, mensaje }) => {
   try {
@@ -19,6 +22,25 @@ const createMail = async ({ nombre, correo, mensaje }) => {
     return true;
   } catch (error) {
     console.error("error enviando el mail");
+    return false;
+  }
+};
+
+const ReceiveMail = async ({ nombre, correo, mensaje }) => {
+  try {
+    mailerService.transport.sendMail(
+      mailReceiveTemplate(nombre, correo, mensaje),
+      (error) => {
+        if (error) {
+          console.error("no se pudo enviar el mail");
+        } else {
+          console.log("Se recivio el mail correctamente");
+        }
+      }
+    );
+    return true;
+  } catch (error) {
+    console.error("error reciviendo el mail");
     return false;
   }
 };
@@ -53,4 +75,5 @@ HACER LA FUNCION ELIMINAR POR ID
 
 module.exports = {
   createMail,
+  ReceiveMail,
 };
