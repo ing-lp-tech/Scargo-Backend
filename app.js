@@ -7,6 +7,8 @@ dotenv.config(); //Habilita las viariables de entorno
 
 const productRouter = require("./router/productRouter");
 
+const cortesRouter = require("./router/cortesRouter");
+
 const contactRouter = require("./router/contactRouter");
 
 const authMiddleware = require("./middlewares/authMiddleware");
@@ -21,6 +23,8 @@ app.use(express.static(__dirname + "/public"));
 const secretKey = process.env.SECRET_KEY_JWT;
 
 app.use("/api/products/", productRouter);
+
+app.use("/api/cortes/", cortesRouter);
 
 app.use("/api/contact/", contactRouter);
 
